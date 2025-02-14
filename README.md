@@ -1,6 +1,6 @@
 # Additional Merchant ID module for Magento
 
-Allow merchnat to use additional merchant ID for some products
+Allow merchants to use additional merchant ID for some products
 
 
 ## Installation
@@ -28,4 +28,16 @@ Upgrade magento database
 
 ```bash
   php bin/magento setup:upgrade
+```
+
+Generate DI configuration
+
+```bash
+  php bin/magento setup:di:compile
+```
+
+Deploy static content
+
+```bash
+  php bin/magento setup:static-content:deploy
 ```
