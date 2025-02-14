@@ -5,4 +5,8 @@
         <plugin name="tabbyMerchantCodeProviderPlugin"
             type="Tabby\Sub\Plugin\Tabby\Checkout\Model\MerchantCodeProvider" sortOrder="1" disabled="false" />
     </type>
+    <type name="Tabby\Checkout\Model\Api\Tabby\Webhooks">
+        <plugin name="tabbyApiTabbyWebhooksPlugin"
+            type="Tabby\Sub\Plugin\Tabby\Checkout\Model\Api\Tabby\Webhooks" sortOrder="1" disabled="false" />
+    </type>
 </config>

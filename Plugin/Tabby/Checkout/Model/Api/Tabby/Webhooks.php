@@ -1,5 +1,5 @@
 <?php
-namespace Tabby\Sub\Plugin\Tabby\Checkout\Api\Tabby;
+namespace Tabby\Sub\Plugin\Tabby\Checkout\Model\Api\Tabby;
 
 class Webhooks
 {
@@ -39,7 +39,7 @@ class Webhooks
         if ($this->processor->isEnabled($storeId)) {
             $newMerchantCode = $this->processor->addSuffix($merchantCode);
             if ($newMerchantCode != $merchantCode) {
-                $this->api->registerWebhook($storeId, $newMerchantCode, $url);
+                $webhooks->registerWebhook($storeId, $newMerchantCode, $url);
             }
         }
         return $result;

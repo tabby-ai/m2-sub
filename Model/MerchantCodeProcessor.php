@@ -49,7 +49,7 @@ class MerchantCodeProcessor
     public function addSuffix(
         string $merchantCode
     ) {
-        if (strpos($merchantCode, self::MERCHANT_CODE_SUFFIX) !== false) {
+        if (strpos($merchantCode, self::MERCHANT_CODE_SUFFIX) === false) {
             $merchantCode .= self::MERCHANT_CODE_SUFFIX;
         }
         return $merchantCode;
