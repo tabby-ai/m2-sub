@@ -113,13 +113,16 @@ class MerchantCodeProcessor
     private function getSkus($storeId = null)
     {
         return array_filter(
-            explode(
-                "\n",
-                $this->config->getValue(
-                    "tabby/tabby_sub/skus",
-                    \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
-                    $storeId
-                ) ?: ''
+            array_map(
+                'trim',
+                explode(
+                    "\n",
+                    $this->config->getValue(
+                        "tabby/tabby_sub/skus",
+                        \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+                        $storeId
+                    ) ?: ''
+                )
             )
         );
     }
