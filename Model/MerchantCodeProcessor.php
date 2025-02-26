@@ -2,6 +2,7 @@
 namespace Tabby\Sub\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Store\Model\StoreManagerInterface;
 
 class MerchantCodeProcessor
 {
@@ -13,13 +14,21 @@ class MerchantCodeProcessor
     private $config;
 
     /**
+     * @var StoreManagerInterface
+     */
+    private $storeManager;
+
+    /**
      * Class constructor
      *
+     * @param StoreManagerInterface $storeManager
      * @param ScopeConfigInterface $config
      */
     public function __construct(
+        StoreManagerInterface $storeManager,
         ScopeConfigInterface $config
     ) {
+        $this->storeManager = $storeManager;
         $this->config = $config;
     }
 
@@ -28,13 +37,24 @@ class MerchantCodeProcessor
      *
      * @param string $merchantCode
      * @param array $skuList
+     * @param float $price
+     * @param ?string $currencyCode
      * @return string
      */
     public function process(
         string $merchantCode,
-        array $skuList
+        array $skuList,
+        float $price,
+        string $currencyCode = null
     ) {
-        if ($this->isEnabledForSkus($skuList)) {
+        if ($currencyCode === null) {
+            $currencyCode = $this->storeManager->getStore()->getCurrentCurrencyCode();
+        };
+
+        if ($currencyCode == 'AED'
+            && $this->isEnabledForSkus($skuList)
+            && $this->isEnabledForPrice($price)
+        ) {
             $merchantCode .= self::MERCHANT_CODE_SUFFIX;
         }
         return $merchantCode;
@@ -79,6 +99,18 @@ class MerchantCodeProcessor
 
         return true;
     }
+
+    /**
+     * Check for price match some range
+     *
+     * @param float $price
+     * @return bool
+     */
+    private function isEnabledForPrice($price)
+    {
+        return ($price >= 2699) && ($price <= 5555);
+    }
+
     /**
      * Check for all items from list provided present in configured list
      *

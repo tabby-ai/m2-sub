@@ -37,7 +37,7 @@ class MerchantCodeProvider
         $result,
         ProductInterface $product
     ) {
-        return $this->processor->process($result, [$product->getSku()]);
+        return $this->processor->process($result, [$product->getSku()], $product->getPrice());
     }
 
     /**
@@ -53,7 +53,7 @@ class MerchantCodeProvider
         $result,
         CartInterface $quote
     ) {
-        return $this->processor->process($result, $this->getSkusFromCart($quote));
+        return $this->processor->process($result, $this->getSkusFromCart($quote), $quote->getGrandTotal(), $quote->getQuoteCurrencyCode());
     }
 
     /**
@@ -69,7 +69,7 @@ class MerchantCodeProvider
         $result,
         OrderInterface $order
     ) {
-        return $this->processor->process($result, $this->getSkusFromOrder($order));
+        return $this->processor->process($result, $this->getSkusFromOrder($order), $order->getGrandTotal(), $order->getOrderCurrencyCode());
     }
 
     /**
