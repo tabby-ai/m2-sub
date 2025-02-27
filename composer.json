@@ -2,7 +2,7 @@
     "name": "tabby/m2-sub",
     "description": "Tabby Additional Merchnat ID Magento module",
     "type": "magento2-module",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "require": {
         "php": ">=7.1",
         "tabby/m2-payments": ">=7.0.0",
